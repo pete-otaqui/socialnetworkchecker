@@ -9,18 +9,57 @@
             <input id="check-handle" type="submit" value="Check" />
         </p>
     </form>
+    
+    <div class="services">
+        
+        <div class="service" id="twitter">
+            <h>Twitter</h>
+            <div class="found"></div>
+            <div class="data"></div>
+        </div>
+        
+        <div class="service" id="facebook">
+            <h>Facebook</h>
+        </div>
+
+    </dl>
 
 {% endblock %}
 
 
 {% block page_end %}
-    
+    {{ super() }}
     <script>
+    (function() {
+        function checkHandle(handle, service) {
+            var out = document.querySelector('#' + service);
+            var out_found = document.querySelector('#' + service + ' .found');
+            var out_data = document.querySelector('#' + service + ' .data');
+            out.className = 'service';
+            out_found.innerHTML = '';
+            return promise.get('/' + service + '/' + handle)
+                .then(function(error, text, xhr) {
+                    console.log(text);
+                    var data = JSON.parse(text);
+                    console.log(data);
+                    if ( data.found ) {
+                        out.className = 'service taken';
+                        out_found.innerHTML = 'TAKEN';
+                    } else {
+                        out.className = 'service available';
+                        out_found.innerHTML = 'AVAILABLE';
+                    }
+                });
+        }
+
         document.getElementById('check-handle').addEventListener('click', function(e) {
             e.preventDefault();
             var handle = document.getElementById('handle').value;
-            document.location.href = '/' + handle;
+            checkHandle(handle, 'twitter');
         }, false);
+
+
+    })();
     </script>
 
 {% endblock %}
