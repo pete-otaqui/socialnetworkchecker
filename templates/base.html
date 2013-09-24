@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% block head %}
+    <!-- link rel="stylesheet" href="style.css" / -->
+    <title>{% block page_title %}Social Network Checker{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <h1>{% block body_title %}Social Network Checker{% endblock %}</h1>
+    </header>
+    <section>
+        {% block content %}{% endblock %}
+    </section>
+    <footer>
+        {% block footer %}
+            &copy; Copyright 2013 by <a href="http://otaqui.com/">Pete Otaqui</a>.
+        {% endblock %}
+    </footer>
+    {% block page_end %}{% endblock %}
+</body>
+</html>

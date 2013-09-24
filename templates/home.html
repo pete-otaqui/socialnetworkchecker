@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <form method="get">
+        <p>
+            Check social networks for a handle:
+            <input id="handle" name="handle" />
+            <input id="check-handle" type="submit" value="Check" />
+        </p>
+    </form>
+
+{% endblock %}
+
+
+{% block page_end %}
+    
+    <script>
+        document.getElementById('check-handle').addEventListener('click', function(e) {
+            e.preventDefault();
+            var handle = document.getElementById('handle').value;
+            document.location.href = '/' + handle;
+        }, false);
+    </script>
+
+{% endblock %}
